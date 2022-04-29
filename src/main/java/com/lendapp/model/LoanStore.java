@@ -1,29 +1,32 @@
 package com.lendapp.model;
 
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+
 
 import java.util.Date;
+import java.util.List;
 
 public class LoanStore {
-
-    private Customer customer;
+    private Integer id;
+    private List<RepaymentHistory> repaymentHistoryList;
     private LoanProduct loanProduct;
     private Date transdate;
     private Boolean status;
 
-    public LoanStore(Customer customer, LoanProduct loanProduct, Date transdate, Boolean status) {
-        this.customer = customer;
-        this.loanProduct = loanProduct;
-        this.transdate = transdate;
-        this.status = status;
+
+    public List<RepaymentHistory> getRepaymentHistoryList() {
+        return repaymentHistoryList;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setRepaymentHistoryList(List<RepaymentHistory> repaymentHistoryList) {
+        this.repaymentHistoryList = repaymentHistoryList;
     }
 
     public LoanProduct getLoanProduct() {

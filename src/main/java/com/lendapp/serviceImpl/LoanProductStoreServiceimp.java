@@ -1,12 +1,13 @@
 package com.lendapp.serviceImpl;
 
 import com.lendapp.model.LoanProduct;
-import com.lendapp.service.LoanProductService;
+import com.lendapp.service.LoanProductStoreService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 @Service
-public class LoanLoanProductServiceimp implements LoanProductService {
+public class LoanProductStoreServiceimp implements LoanProductStoreService {
+    @Override
     public HashMap loanProductStore(){
         HashMap<Integer,LoanProduct>productStore = new HashMap();
         LoanProduct loanProduct = new LoanProduct(100.0,1,12.5,30,"yearly",12.5,"$");

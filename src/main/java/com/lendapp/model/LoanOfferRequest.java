@@ -1,20 +1,16 @@
 package com.lendapp.model;
 
 public class LoanOfferRequest {
-    public LoanOfferRequest(Customer customerid, LoanProduct loanproductid) {
-        this.customerid = customerid;
-        this.loanproductid = loanproductid;
-    }
 
-    private Customer customerid;
+    private CustomerStore customerid;
 
+    private LoanProduct loanproductid;
 
-
-    public Customer getCustomerid() {
+    public CustomerStore getCustomerid() {
         return customerid;
     }
 
-    public void setCustomerid(Customer customerid) {
+    public void setCustomerid(CustomerStore customerid) {
         this.customerid = customerid;
     }
 
@@ -26,6 +22,6 @@ public class LoanOfferRequest {
         this.loanproductid = loanproductid;
     }
 
-    private LoanProduct loanproductid;
+
 
 }
