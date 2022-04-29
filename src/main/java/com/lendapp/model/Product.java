@@ -1,6 +1,6 @@
 package com.lendapp.model;
 
-public class LoanProduct {
+public class Product {
     private Integer id;
     private Double amount;
     private Double interest;
@@ -9,7 +9,7 @@ public class LoanProduct {
     private Double interestrate;
     private String currency;
 
-    public LoanProduct(Double amount,Integer id, Double interest, Integer tenure, String tenuretype, Double interestrate, String currency) {
+    public Product(Double amount, Integer id, Double interest, Integer tenure, String tenuretype, Double interestrate, String currency) {
         this.amount = amount;
         this.interest = interest;
         this.tenure = tenure;

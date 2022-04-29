@@ -6,14 +6,16 @@
 package com.lendapp.route;
 
 import com.lendapp.model.*;
-import com.lendapp.service.CustomerStoreService;
-import com.lendapp.service.LoanProductStoreService;
-import com.lendapp.service.LoanStoreService;
+import com.lendapp.model.request.CustomerRequest;
+import com.lendapp.model.request.RepaymentRequest;
+import com.lendapp.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -22,50 +24,43 @@ import java.util.List;
 @RestController
 @RequestMapping("/task")
 public class TaskController {
+
   @Autowired
-  CustomerStoreService customerStoreService;
-  @Autowired
-  LoanStoreService loanStoreService;
-  @Autowired
-  LoanProductStoreService loanProductStoreService;
+  LoanService loanService;
 
-  @PostMapping("/add/customerStore")
-  public HashMap customerStore(@RequestBody CustomerStore customer) {
-    return customerStoreService.customerStore(customer);
+
+  @PostMapping("/customer/register")
+  public ResponseEntity registerCustomer(@RequestBody CustomerRequest customer) {
+    return loanService.registerCustomer(customer);
+  }
+  @PostMapping("/customer/list")
+  public ResponseEntity listCustomer() {
+    return loanService.listCustomers();
   }
 
-  @GetMapping("/list/loanProductStore")
-  public HashMap loanProductStore(){
-    return loanProductStoreService.loanProductStore();
+  @GetMapping("/product/list")
+  public ResponseEntity listLoanProducts(){
+    return loanService.listLoanProducts();
   }
 
-  @PostMapping("/add/loans")
-  public HashMap loans(@RequestBody Loans loans){
-    return loanStoreService.loans(loans);
+  @GetMapping("/loan/list")
+ public ResponseEntity requestLoan(@RequestParam Integer customerId, @RequestParam Integer productId) {
+    return loanService.requestLoan(customerId, productId);
   }
-
-  @PostMapping("/loansStore")
-  public HashMap loanStore(@RequestBody LoanStore loanStore){
-    return loanStoreService.loanStore(loanStore);
+  @GetMapping("/loan/retrieveBalance")
+ public ResponseEntity retrieveBalanceByCustomer(@RequestParam Integer customerId){
+    return loanService.retrieveBalanceByCustomer(customerId);
   }
-
-  @PostMapping("/add/wallet")
-  public HashMap Wallet(@RequestBody Wallet wallet){
-    return loanStoreService.wallet(wallet);
-  }
-
-  @GetMapping ("/saveLoan")
-  public List<Wallet> getSaveLoanOffer(@RequestParam String customerid,  @RequestParam String productid){
-    return loanStoreService.getSaveLoanOffer(customerid, productid);
-  }
-  @PostMapping("/getLoan")
- public List<LoanProduct> getLoanOffer(@RequestParam String customerid, @RequestParam String productid){
-    return loanStoreService.getLoanOffer(customerid, productid);
-  }
-
-  @PostMapping("/getRepayment")
-  public List<Loans> getRepaymentHistory(Integer customerId, Integer loanStoreId, Double repayment){
-    return loanStoreService.getRepaymentHistory(customerId, loanStoreId, repayment);
-  }
-
+@PostMapping("/loan/repayment")
+  public ResponseEntity addLoanRepayment(@RequestParam RepaymentRequest repaymentRequest){
+    return loanService.addLoanRepayment(repaymentRequest);
+}
+@GetMapping("/loan/repaymentByCustomer")
+  public ResponseEntity listLoanRepaymentByCustomer(@RequestParam Integer customerId){
+    return loanService.listLoanRepaymentByCustomer(customerId);
+}
+@GetMapping("/loan/check")
+  ResponseEntity checkLoanEligibilityStatus(@RequestParam Integer customerId){
+    return loanService.checkLoanEligibilityStatus(customerId);
+}
 }
